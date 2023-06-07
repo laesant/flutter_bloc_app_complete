@@ -12,11 +12,14 @@ class Exercise {
       this.index,
       this.startTime});
 
-  factory Exercise.fromJson(Map<String, dynamic> json) => Exercise(
-        title: json["title"],
-        prelude: json["prelude"],
-        duration: json["duration"],
-      );
+  factory Exercise.fromJson(
+          Map<String, dynamic> json, int index, int startTime) =>
+      Exercise(
+          title: json["title"],
+          prelude: json["prelude"],
+          duration: json["duration"],
+          index: index,
+          startTime: startTime);
 
   Map<String, dynamic> toJson() => {
         "title": title,
