@@ -1,6 +1,7 @@
+import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc_app_complete/models/exercise.dart';
 
-class Workout {
+class Workout extends Equatable {
   final String? title;
   final List<Exercise> exercises;
 
@@ -19,4 +20,10 @@ class Workout {
   }
 
   Map<String, dynamic> toJson() => {'title': title, 'exercises': exercises};
+
+  @override
+  List<Object?> get props => [title, exercises];
+
+  @override
+  bool? get stringify => true;
 }
