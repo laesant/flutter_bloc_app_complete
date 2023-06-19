@@ -8,5 +8,6 @@ class WorkoutCubit extends Cubit<WorkoutState> {
 
   void editWorkout(Workout workout, int index) =>
       emit(WorkoutEditing(workout, index));
+
+  dynamic goHome() => emit(const WorkoutInitial());
 }
-          
