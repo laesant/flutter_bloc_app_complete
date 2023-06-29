@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_bloc_app_complete/blocs/workout_cubit.dart';
 import 'package:flutter_bloc_app_complete/blocs/workouts_cubit.dart';
-import 'package:flutter_bloc_app_complete/models/workout.dart';
 import 'package:flutter_bloc_app_complete/screens/edit_workout_page.dart';
 import 'package:flutter_bloc_app_complete/screens/home_page.dart';
 import 'package:flutter_bloc_app_complete/states/workout_state.dart';
@@ -34,16 +33,15 @@ class WorkoutTime extends StatelessWidget {
             BlocProvider<WorkoutCubit>(create: (context) => WorkoutCubit())
           ],
           child: BlocBuilder<WorkoutCubit, WorkoutState>(
-            builder: (context, state) {
-              if (state is WorkoutInitial) {
-                return const HomePage();
-              } else if (state is WorkoutEditing) {
-                return const EditWorkoutPage();
-              }
+              builder: (context, state) {
+            if (state is WorkoutInitial) {
+              return const HomePage();
+            } else if (state is WorkoutEditing) {
+              return const EditWorkoutPage();
+            }
 
-              return Container();
-            },
-          )),
+            return Container();
+          }))
     );
   }
 }
