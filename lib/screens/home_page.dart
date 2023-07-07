@@ -26,6 +26,7 @@ class HomePage extends StatelessWidget {
                   .map((workout) => ExpansionPanelRadio(
                       value: workout,
                       headerBuilder: (context, isExpanded) => ListTile(
+                          onTap: () => !isExpanded ? context.read<WorkoutCubit>().startWorkout(workout) : null,
                           visualDensity: const VisualDensity(
                               horizontal: 0,
                               vertical: VisualDensity.maximumDensity),

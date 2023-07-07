@@ -4,9 +4,17 @@ import 'package:flutter_bloc_app_complete/blocs/workout_cubit.dart';
 import 'package:flutter_bloc_app_complete/blocs/workouts_cubit.dart';
 import 'package:flutter_bloc_app_complete/screens/edit_workout_page.dart';
 import 'package:flutter_bloc_app_complete/screens/home_page.dart';
+import 'package:flutter_bloc_app_complete/screens/workout_in_progress_page.dart';
 import 'package:flutter_bloc_app_complete/states/workout_state.dart';
+import 'package:hydrated_bloc/hydrated_bloc.dart';
+import 'package:path_provider/path_provider.dart';
 
-void main() => runApp(const WorkoutTime());
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  HydratedBloc.storage = await HydratedStorage.build(
+      storageDirectory: await getApplicationDocumentsDirectory());
+  runApp(const WorkoutTime());
+}
 
 class WorkoutTime extends StatelessWidget {
   const WorkoutTime({super.key});
@@ -40,7 +48,7 @@ class WorkoutTime extends StatelessWidget {
                 return const EditWorkoutPage();
               }
 
-              return Container();
+              return const WorkoutInProgressPage();
             })));
   }
 }
