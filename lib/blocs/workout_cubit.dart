@@ -23,7 +23,7 @@ class WorkoutCubit extends Cubit<WorkoutState> {
     if (state is WorkoutInProgress) {
       WorkoutInProgress wip = state as WorkoutInProgress;
       if (wip.elapsed! < wip.workout!.getTotal()) {
-        emit(WorkoutInProgress(wip.workout, wip.elapsed! + 1));
+        emit(WorkoutInProgress(wip.workout, (wip.elapsed! + 1)));
       } else {
         _timer!.cancel();
         Wakelock.disable();
@@ -35,7 +35,6 @@ class WorkoutCubit extends Cubit<WorkoutState> {
   startWorkout(Workout workout, [int? index]) {
     Wakelock.enable();
     if (index != null) {
-      
     } else {
       emit(WorkoutInProgress(workout, 0));
     }
