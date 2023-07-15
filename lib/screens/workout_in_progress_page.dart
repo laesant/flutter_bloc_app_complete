@@ -56,7 +56,7 @@ class WorkoutInProgressPage extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(formatTime(stats['workoutElapsed'], true)),
-                      Text('-${formatTime(stats['workoutRemaining'], true)}'),
+                      Text('-${formatTime(stats['workoutRemaining'], true)}')
                     ],
                   )
                 ],
