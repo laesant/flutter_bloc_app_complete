@@ -29,7 +29,9 @@ class WorkoutInProgressPage extends StatelessWidget {
         "totalExercise": workout.exercises.length,
         "currentExerciseIndex": exercise.index!.toDouble(),
         "workoutRemaining": workoutTotal - workoutElapsed,
-        "exerciseRemaining": exerciseRemaining
+        "exerciseRemaining": exerciseRemaining,
+        "exerciseProgress": exerciseElapsed / exerciseTotal,
+        "isPrelude": isPrelude
       };
     }
 
@@ -47,10 +49,9 @@ class WorkoutInProgressPage extends StatelessWidget {
               child: Column(
                 children: [
                   LinearProgressIndicator(
-                    backgroundColor: Colors.blue[100],
-                    minHeight: 10,
-                    value: stats['workoutProgress'],
-                  ),
+                      backgroundColor: Colors.blue[100],
+                      minHeight: 10,
+                      value: stats['workoutProgress']),
                   const SizedBox(height: 30),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -58,6 +59,38 @@ class WorkoutInProgressPage extends StatelessWidget {
                       Text(formatTime(stats['workoutElapsed'], true)),
                       Text('-${formatTime(stats['workoutRemaining'], true)}')
                     ],
+                  ),
+                  const Spacer(),
+                  InkWell(
+                    child: Stack(
+                      alignment: const Alignment(0, 0),
+                      children: [
+                        Center(
+                          child: SizedBox(
+                            height: 220,
+                            width: 220,
+                            child: CircularProgressIndicator(
+                              strokeWidth: 25,
+                              value: stats['exerciseProgress'],
+                              valueColor: AlwaysStoppedAnimation<Color>(
+                                  stats['isPrelude']
+                                      ? Colors.red
+                                      : Colors.blue),
+                            ),
+                          ),
+                        ),
+                        Center(
+                          child: SizedBox(
+                            height: 300,
+                            width: 300,
+                            child: Padding(
+                              padding: const EdgeInsets.only(bottom: 20),
+                              child: Image.asset('assets/stopwatch.png'),
+                            ),
+                          ),
+                        )
+                      ],
+                    ),
                   )
                 ],
               ),
