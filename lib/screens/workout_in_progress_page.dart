@@ -67,26 +67,36 @@ class WorkoutInProgressPage extends StatelessWidget {
                   ),
                   const Spacer(),
                   InkWell(
+                      onTap: () {
+                        if (state is WorkoutInProgress) {
+                          BlocProvider.of<WorkoutCubit>(context).pauseWorkout();
+                        } else if( state is WorkoutPaused){
+                          BlocProvider.of<WorkoutCubit>(context)
+                              .resumeWorkout();
+                        }
+                      },
                       child: Stack(alignment: const Alignment(0, 0), children: [
-                    Center(
-                        child: SizedBox(
-                            height: 220,
-                            width: 220,
-                            child: CircularProgressIndicator(
-                                strokeWidth: 25,
-                                value: stats['exerciseProgress'],
-                                valueColor: AlwaysStoppedAnimation<Color>(
-                                    stats['isPrelude']
-                                        ? Colors.red
-                                        : Theme.of(context).primaryColor)))),
-                    Center(
-                        child: SizedBox(
-                            height: 300,
-                            width: 300,
-                            child: Padding(
-                                padding: const EdgeInsets.only(bottom: 20),
-                                child: Image.asset('assets/stopwatch.png'))))
-                  ]))
+                        Center(
+                            child: SizedBox(
+                                height: 220,
+                                width: 220,
+                                child: CircularProgressIndicator(
+                                    strokeWidth: 25,
+                                    value: stats['exerciseProgress'],
+                                    valueColor: AlwaysStoppedAnimation<Color>(
+                                        stats['isPrelude']
+                                            ? Colors.red
+                                            : Theme.of(context)
+                                                .primaryColor)))),
+                        Center(
+                            child: SizedBox(
+                                height: 300,
+                                width: 300,
+                                child: Padding(
+                                    padding: const EdgeInsets.only(bottom: 20),
+                                    child:
+                                        Image.asset('assets/stopwatch.png'))))
+                      ]))
                 ],
               ),
             ),
